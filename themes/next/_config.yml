@@ -12,6 +12,11 @@ keywords: "lhzbxx,blog,redefine"
 # Leave rss as empty to use site's feed link.
 # Set rss to specific value if you have burned your feed already.
 rss:
+feed:
+  type: atom
+  path: atom.xml
+  limit: 20
+  hub:
 
 # Specify the date when the site was setup
 #since: 2015
@@ -29,10 +34,10 @@ canonical: true
 # When running the site in a subdirectory (e.g. domain.tld/blog), remove the leading slash (/archives -> archives)
 menu:
   home: /
-  #categories: /categories
-  #about: /about
-  archives: /archives
+  categories: /categories
   tags: /tags
+  archives: /archives
+  about: /about
   #commonweal: /404.html
 
 
