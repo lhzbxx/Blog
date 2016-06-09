@@ -76,8 +76,12 @@ theme: next
 deploy:
 - type: git
   repo: git@github.com:lhzbxx/Blog.git
-  branch: master
+  branch: page
 - type: rsync
   host: 115.28.71.169
   user: root
   root: /home/www/blog
+  port: 22
+  delete: true
+  verbose: true
+  ignore_errors: false
