@@ -9,7 +9,12 @@ description: I'll carry this world.
 author: lhzbxx
 language: zh-Hans
 timezone: Asia/Shanghai
-avatar: /images/avatar.jpeg
+
+# Third party
+duoshuo_shortname: lhzbxx
+baidu_analytics: f35e241be24348def2d8399101943aa7
+# jiathis: true
+swiftype_key: fsfRg1GthdXBUwsY44zu
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
@@ -17,12 +22,6 @@ url: http://lhzbxx.top
 root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:
-
-# Social links
-social:
-  github: https://github.com/lhzbxx
-  weibo: http://weibo.com/3789369385
-  zhihu: http://www.zhihu.com/people/lu-hao-59
 
 # Directory
 source_dir: source
