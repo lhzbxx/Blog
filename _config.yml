@@ -74,4 +74,10 @@ theme: next
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
-  type:
+- type: git
+  repo: git@github.com:lhzbxx/Blog.git
+  branch: master
+- type: rsync
+  host: 115.28.71.169
+  user: root
+  root: /home/www/blog
