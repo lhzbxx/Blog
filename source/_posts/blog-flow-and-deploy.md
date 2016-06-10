@@ -1,7 +1,7 @@
 ---
 title: 「Redefined」搭建与部署
 date: 2016-06-10 01:51:51
-updated: 2016-06-10 01:51:51
+updated: 2016-06-10 17:30:27
 categories: 开发手札
 tags:
   - 备忘
@@ -54,32 +54,28 @@ $ hexo init blog
 	``` bash
 	$ hexo new post xxx
 	```
-
 2. 编辑文字
 
 	``` bash
 	$ vim xxx
 	```
-
 3. （可选）本地测试
 
 	``` bash
 	$ hexo server
 	```
-
 4. 生成静态文件
 
 	``` bash
 	$ hexo generate
 	```
-	
 5. 发布到远程服务器
 
 	``` bash
 	$ hexo deploy
 	```
 
-当然，这是把配置都抛到了一遍，从本质上来说，你只需要两步就可以完成。
+当然，这是把配置都抛到了一边，从本质上来说，你只需要两步就可以完成。
 
 第一步，用Markdown编辑好一篇文章，放在/source/_post目录下。
 
