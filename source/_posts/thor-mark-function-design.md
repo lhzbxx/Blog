@@ -1,5 +1,5 @@
 ---
-title: thor-mark-function-design
+title: 「ThorMark」功能设计
 tags:
   - ThorMark
 date: 2016-06-22 03:25:02
