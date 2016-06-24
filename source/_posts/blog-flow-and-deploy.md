@@ -111,7 +111,7 @@ hexo generate --deploy
 $ hexo server
 ```
 
-默认会在http://localhost:4000/下预览。
+默认会在 http://localhost:4000 下预览。
 
 ### 静态文件
 

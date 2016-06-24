@@ -1,1 +1,3 @@
-hexo generate --deploy
+hexo generate
+gulp
+hexo deploy
