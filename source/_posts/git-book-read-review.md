@@ -1,5 +1,5 @@
 ---
-title: 「Git Book」读后感
+title: 「Git Book」读后感（未完成）
 tags:
   - 备忘
 date: 2016-07-06 18:19:01
