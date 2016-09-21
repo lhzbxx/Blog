@@ -53,28 +53,41 @@ categories: 随想录
 * Dash，离线查看文档用，虽然我很少用。
 * Code Runner，简单的测试代码能否跑通。
 * Charles，抓包工具，非常实用！
-* 
 * Paw3，测试、查看API很有用！
+* SourceTree，Git GUI工具，有时候查看diff和文件status比较方便。
 * Sketch，查看设计搞&导出3X图片。
 * Sublime Text，编辑器啊！
 * 网易云音乐，听歌啊。
 * 微信，虽然我不太想用，但周围人都在用。
+* mpv，视频播放器，可以配合CLI使用。
 
 ### CLI
 
 * Git，没有它我活不下去！
 * Python3
+    * pip
+    * iPython
+    * Django
+    * you-get
 * NPM
-    * Hexo，博客嘛！
+    * Hexo
     * Ionic
     * React Native
     * Vue
+    * GitBook
+    * PSI（检测网页）
+    * Gulp
 * Composer
+    * Lumen
 * JDK
 
 ### 插件
 
 * Xcode插件
+  * Allatraz
+  * SCXcodeSwitchExpander
+  * Swimat
+  * RealmBrowser
 * Sublime Text插件
 * JetBrains插件
 * Android Studio插件
@@ -83,3 +96,49 @@ categories: 随想录
 ### 配置
 
 * Vim
+* Git
+  * `git config --global user.name "lhzbxx"`
+  * `git config --global user.email "lhzbxx@gmail.com"`
+
+### CLI工具
+
+* GitBook
+* Lumen
+* Django
+* Hexo
+* Pandoc
+* Graphviz
+* ImageMagick
+* Aria2c
+* QuickLookin-Plugins
+  * qlcolorcode
+  * qlstephen
+  * qlmarkdown
+  * quicklook-json
+
+## 脚本
+
+`ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"`
+
+
+
+`xcode-select --install`
+
+
+
+`brew cask install google-chrome`
+
+`brew cask install sublime-text`
+
+`brew cask install typora`
+
+`brew cask install sketch`
+
+
+
+`brew install cocoapods`
+
+`brew install carthage`
+
+
+
