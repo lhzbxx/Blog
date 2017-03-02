@@ -1,0 +1,918 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+  
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="备忘,个人经历," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="重定义" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="昨天我的MBP突然就血崩了，真的是猝不及防。
+症状如下：能够连接到互联网，DNS、HOSTS、VPN、WiFi均没有任何问题，但是就是无法通过任何官方应用程序中连接到苹果服务器，也就是说，App Store、iCloud、Safari、Simulator的联网功能全部挂掉了。
+倒腾了大半天时间，改了无数个配置，还原了一些东西，重启了N次，依旧没有解决这个问题，所以我只能动用终极绝招——彻底重装系统">
+<meta property="og:type" content="article">
+<meta property="og:title" content="重新搭建Mac的开发环境及一些吐槽">
+<meta property="og:url" content="http://lhzbxx.top/2016/09/05/reinstall-mac-steps-and-tsukkomi/index.html">
+<meta property="og:site_name" content="重定义">
+<meta property="og:description" content="昨天我的MBP突然就血崩了，真的是猝不及防。
+症状如下：能够连接到互联网，DNS、HOSTS、VPN、WiFi均没有任何问题，但是就是无法通过任何官方应用程序中连接到苹果服务器，也就是说，App Store、iCloud、Safari、Simulator的联网功能全部挂掉了。
+倒腾了大半天时间，改了无数个配置，还原了一些东西，重启了N次，依旧没有解决这个问题，所以我只能动用终极绝招——彻底重装系统">
+<meta property="og:updated_time" content="2016-09-05T08:14:31.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="重新搭建Mac的开发环境及一些吐槽">
+<meta name="twitter:description" content="昨天我的MBP突然就血崩了，真的是猝不及防。
+症状如下：能够连接到互联网，DNS、HOSTS、VPN、WiFi均没有任何问题，但是就是无法通过任何官方应用程序中连接到苹果服务器，也就是说，App Store、iCloud、Safari、Simulator的联网功能全部挂掉了。
+倒腾了大半天时间，改了无数个配置，还原了一些东西，重启了N次，依旧没有解决这个问题，所以我只能动用终极绝招——彻底重装系统">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 6294029580697077000,
+      author: 'KING'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://lhzbxx.top/2016/09/05/reinstall-mac-steps-and-tsukkomi/"/>
+
+  <title> 重新搭建Mac的开发环境及一些吐槽 | 重定义 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?f35e241be24348def2d8399101943aa7";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">重定义</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">Redefined</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="#" class="st-search-show-outputs">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <form class="site-search-form">
+  <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+</form>
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', 'LZsc-Dy83NB3z5goeo27','2.0.0');
+</script>
+
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                重新搭建Mac的开发环境及一些吐槽
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-09-05T16:14:31+08:00" content="2016-09-05">
+              2016-09-05
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/随想录/" itemprop="url" rel="index">
+                    <span itemprop="name">随想录</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/09/05/reinstall-mac-steps-and-tsukkomi/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/05/reinstall-mac-steps-and-tsukkomi/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+              &nbsp; | &nbsp;
+              <span class="page-pv">阅读次数
+              <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+              </span>
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>昨天我的MBP突然就血崩了，真的是猝不及防。</p>
+<p>症状如下：能够连接到互联网，DNS、HOSTS、VPN、WiFi均没有任何问题，但是就是无法通过任何官方应用程序中连接到苹果服务器，也就是说，App Store、iCloud、Safari、Simulator的联网功能全部挂掉了。</p>
+<p>倒腾了大半天时间，改了无数个配置，还原了一些东西，重启了N次，依旧没有解决这个问题，所以我只能动用终极绝招——彻底重装系统。</p>
+<p>但是重装以后各种配置都没了啊，各种安装的东西统统消失了啊！</p>
+<p>以前一直想记录自己的开发环境的配置，最好写出来一个自动化的脚本出来，但是一直都懒得做。</p>
+<p>今天就记录一下自己的开发环境配置。</p>
+<a id="more"></a>
+<h2 id="吐槽"><a href="#吐槽" class="headerlink" title="吐槽"></a>吐槽</h2><p>不管怎么样，我一定要先吐槽一下Mac，或者说是Mac OS X，竟然敢在即将升级到macOS的前两天挂掉！</p>
+<p>首先，Mac到底好不好用？</p>
+<p>说实话，如果你做iOS开发或者把它当做一个Terminal+Editor，其实Mac还是相当好用的，内存管理的很棒，UI和交互做得非常流畅。</p>
+<p>但是。</p>
+<p>你不能拿Mac做下面这样的事：</p>
+<ol>
+<li>观看通过RMTP+Flash实现的网络直播，它会变得超超超级烫手。</li>
+<li>部署大量（&gt;3个）的服务，它真的、真的会变得超卡，UI都会有明显卡顿。</li>
+<li>做iOS开发时候插各种iPhone，分分钟吃掉30G+的存储空间。</li>
+</ol>
+<p>我还遇到过同样诡异的bug，就是通知消息卡住，而且Fn组合键全都失效。</p>
+<p>所以，结论是：MBP对我来说就是一个Terminal+Editor+iOS Develop Environment。</p>
+<h2 id="开发环境"><a href="#开发环境" class="headerlink" title="开发环境"></a>开发环境</h2><h3 id="软件"><a href="#软件" class="headerlink" title="软件"></a>软件</h3><ul>
+<li>iTerm2，终端利器，不解释了。</li>
+<li>Xcode，必要的开发环境。</li>
+<li>Chrome，除了Coding另外50%的时间应该在这上面了。</li>
+<li>JetBrains系列，IntelliJ IDEA Ultimate、AppCode和Android Studio。</li>
+<li>Dash，离线查看文档用，虽然我很少用。</li>
+<li>Code Runner，简单的测试代码能否跑通。</li>
+<li>Charles，抓包工具，非常实用！</li>
+<li>Paw3，测试、查看API很有用！</li>
+<li>SourceTree，Git GUI工具，有时候查看diff和文件status比较方便。</li>
+<li>Sketch，查看设计搞&amp;导出3X图片。</li>
+<li>Sublime Text，编辑器啊！</li>
+<li>网易云音乐，听歌啊。</li>
+<li>微信，虽然我不太想用，但周围人都在用。</li>
+<li>mpv，视频播放器，可以配合CLI使用。</li>
+</ul>
+<h3 id="CLI"><a href="#CLI" class="headerlink" title="CLI"></a>CLI</h3><ul>
+<li>Git，没有它我活不下去！</li>
+<li>Python3<ul>
+<li>pip</li>
+<li>iPython</li>
+<li>Django</li>
+<li>you-get</li>
+</ul>
+</li>
+<li>NPM<ul>
+<li>Hexo</li>
+<li>Ionic</li>
+<li>React Native</li>
+<li>Vue</li>
+<li>GitBook</li>
+<li>PSI（检测网页）</li>
+<li>Gulp</li>
+</ul>
+</li>
+<li>Composer<ul>
+<li>Lumen</li>
+</ul>
+</li>
+<li>JDK</li>
+</ul>
+<h3 id="插件"><a href="#插件" class="headerlink" title="插件"></a>插件</h3><ul>
+<li>Xcode插件<ul>
+<li>Allatraz</li>
+<li>SCXcodeSwitchExpander</li>
+<li>Swimat</li>
+<li>RealmBrowser</li>
+</ul>
+</li>
+<li>Sublime Text插件</li>
+<li>JetBrains插件</li>
+<li>Android Studio插件</li>
+<li>Paw3插件</li>
+</ul>
+<h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><ul>
+<li>Vim</li>
+<li>Git<ul>
+<li><code>git config --global user.name &quot;lhzbxx&quot;</code></li>
+<li><code>git config --global user.email &quot;lhzbxx@gmail.com&quot;</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="CLI工具"><a href="#CLI工具" class="headerlink" title="CLI工具"></a>CLI工具</h3><ul>
+<li>GitBook</li>
+<li>Lumen</li>
+<li>Django</li>
+<li>Hexo</li>
+<li>Pandoc</li>
+<li>Graphviz</li>
+<li>ImageMagick</li>
+<li>Aria2c</li>
+<li>QuickLookin-Plugins<ul>
+<li>qlcolorcode</li>
+<li>qlstephen</li>
+<li>qlmarkdown</li>
+<li>quicklook-json</li>
+</ul>
+</li>
+</ul>
+<h2 id="脚本"><a href="#脚本" class="headerlink" title="脚本"></a>脚本</h2><p><code>ruby -e &quot;$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)&quot;</code></p>
+<p><code>xcode-select --install</code></p>
+<p><code>brew cask install google-chrome</code></p>
+<p><code>brew cask install sublime-text</code></p>
+<p><code>brew cask install typora</code></p>
+<p><code>brew cask install sketch</code></p>
+<p><code>brew install cocoapods</code></p>
+<p><code>brew install carthage</code></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>如果觉得对您有帮助，请我喝杯咖啡可好？</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/ali_pay.jpg" alt="lhzbxx WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/wechat_pay.jpg" alt="lhzbxx Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/备忘/" rel="tag">#备忘</a>
+          
+            <a href="/tags/个人经历/" rel="tag">#个人经历</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/08/25/art-party-function-design/" rel="next" title="art_party_function_design">
+                <i class="fa fa-chevron-left"></i> art_party_function_design
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/09/05/reinstall-mac-steps-and-tsukkomi/"
+           data-title="重新搭建Mac的开发环境及一些吐槽" data-url="http://lhzbxx.top/2016/09/05/reinstall-mac-steps-and-tsukkomi/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpeg"
+               alt="lhzbxx" />
+          <p class="site-author-name" itemprop="name">lhzbxx</p>
+          <p class="site-description motion-element" itemprop="description">I'll carry this world.</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">17</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/lhzbxx" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/3789369385" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.zhihu.com/people/lu-hao-59" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-circle"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://steamcommunity.com/id/lhzbxx" target="_blank" title="Steam">
+                  
+                    <i class="fa fa-fw fa-steam"></i>
+                  
+                  Steam
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              作品集
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://github.com/lhzbxx/follow3" title="Follow3" target="_blank">Follow3</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://github.com/lhzbxx/saveplus" title="Save+" target="_blank">Save+</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#吐槽"><span class="nav-number">1.</span> <span class="nav-text">吐槽</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#开发环境"><span class="nav-number">2.</span> <span class="nav-text">开发环境</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#软件"><span class="nav-number">2.1.</span> <span class="nav-text">软件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CLI"><span class="nav-number">2.2.</span> <span class="nav-text">CLI</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#插件"><span class="nav-number">2.3.</span> <span class="nav-text">插件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置"><span class="nav-number">2.4.</span> <span class="nav-text">配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CLI工具"><span class="nav-number">2.5.</span> <span class="nav-text">CLI工具</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#脚本"><span class="nav-number">3.</span> <span class="nav-text">脚本</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">lhzbxx</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="//cdn.bootcss.com/jquery/2.1.3/jquery.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.bootcss.com/jquery_lazyload/1.9.7/jquery.lazyload.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.bootcss.com/velocity/1.2.3/velocity.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.bootcss.com/velocity/1.2.3/velocity.ui.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"lhzbxx"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementById('footer')
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+      
+      <script src="//cdn.bootcss.com/UAParser.js/0.7.10/ua-parser.min.js"></script>
+      <script src="/js/src/hook-duoshuo.js"></script>
+    
+  
+
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>

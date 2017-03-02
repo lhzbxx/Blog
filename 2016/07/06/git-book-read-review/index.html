@@ -1,0 +1,889 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+  
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="备忘," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="重定义" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="其实用了Git这么久，从当初比较痛苦的看各种Git Flow入门，再到后来自己亲自尝试发现并没有很复杂——在这个过程中，我对Git的本质的理解都源于自身的实践。但是我感觉这是不对的，还是有必要对Git的实现做一些了解，毕竟自己的大型TODO列表中有一个文档中心的设计，还是需要版本控制系统的支持的。再加上最近了解到Google的巨型版本控制系统，所以对VCS的实现产生了一些兴趣。
+于是我就翻出来了这">
+<meta property="og:type" content="article">
+<meta property="og:title" content="「Git Book」读后感（未完成）">
+<meta property="og:url" content="http://lhzbxx.top/2016/07/06/git-book-read-review/index.html">
+<meta property="og:site_name" content="重定义">
+<meta property="og:description" content="其实用了Git这么久，从当初比较痛苦的看各种Git Flow入门，再到后来自己亲自尝试发现并没有很复杂——在这个过程中，我对Git的本质的理解都源于自身的实践。但是我感觉这是不对的，还是有必要对Git的实现做一些了解，毕竟自己的大型TODO列表中有一个文档中心的设计，还是需要版本控制系统的支持的。再加上最近了解到Google的巨型版本控制系统，所以对VCS的实现产生了一些兴趣。
+于是我就翻出来了这">
+<meta property="og:updated_time" content="2016-07-06T10:19:01.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="「Git Book」读后感（未完成）">
+<meta name="twitter:description" content="其实用了Git这么久，从当初比较痛苦的看各种Git Flow入门，再到后来自己亲自尝试发现并没有很复杂——在这个过程中，我对Git的本质的理解都源于自身的实践。但是我感觉这是不对的，还是有必要对Git的实现做一些了解，毕竟自己的大型TODO列表中有一个文档中心的设计，还是需要版本控制系统的支持的。再加上最近了解到Google的巨型版本控制系统，所以对VCS的实现产生了一些兴趣。
+于是我就翻出来了这">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 6294029580697077000,
+      author: 'KING'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://lhzbxx.top/2016/07/06/git-book-read-review/"/>
+
+  <title> 「Git Book」读后感（未完成） | 重定义 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?f35e241be24348def2d8399101943aa7";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">重定义</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">Redefined</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="#" class="st-search-show-outputs">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <form class="site-search-form">
+  <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+</form>
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', 'LZsc-Dy83NB3z5goeo27','2.0.0');
+</script>
+
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                「Git Book」读后感（未完成）
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-07-06T18:19:01+08:00" content="2016-07-06">
+              2016-07-06
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/读书笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">读书笔记</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/07/06/git-book-read-review/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/06/git-book-read-review/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+              &nbsp; | &nbsp;
+              <span class="page-pv">阅读次数
+              <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+              </span>
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>其实用了Git这么久，从当初比较痛苦的看各种Git Flow入门，再到后来自己亲自尝试发现并没有很复杂——在这个过程中，我对Git的本质的理解都源于自身的实践。但是我感觉这是不对的，还是有必要对Git的实现做一些了解，毕竟自己的大型TODO列表中有一个文档中心的设计，还是需要版本控制系统的支持的。再加上最近了解到Google的巨型版本控制系统，所以对VCS的实现产生了一些兴趣。</p>
+<p>于是我就翻出来了这本「Git Book」来看了看。</p>
+<p>当然，这本书并没有详细描述Git本身具体是怎么构建的，但介绍了很多重要的概念和原理。在此总结一下，为以后的工作做个铺垫。</p>
+<a id="more"></a>
+<h2 id="一些概念"><a href="#一些概念" class="headerlink" title="一些概念"></a>一些概念</h2><h3 id="Git模型"><a href="#Git模型" class="headerlink" title="Git模型"></a>Git模型</h3><ul>
+<li>所有文件都是通过SHA1哈希计算后的40-digit对象名来索引的。</li>
+<li>对象包括：类型，大小和内容。</li>
+<li>对象的四种类型： blob，tree，commit，tag。</li>
+<li>blob：文件的全部内容。</li>
+<li>tree：一串条目，表达目录层次。</li>
+<li>commit：指向root of trees，并带有相关的描述信息。</li>
+<li>tag：标签对象包括一个对象名，对象类型，标签名和标签创建人。</li>
+</ul>
+<h3 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h3><ul>
+<li>Git目录，就是工程文件的根目录下的.git目录。</li>
+<li>Git目录包括HEAD，config，description，hooks，index，logs，objects，refs。</li>
+<li>logs存储各个refs的历史信息。</li>
+<li>objects存储本地仓库的所有对象。</li>
+<li>refs标识项目里每个分支指向了哪个提交。</li>
+</ul>
+<h3 id="工作目录"><a href="#工作目录" class="headerlink" title="工作目录"></a>工作目录</h3><ul>
+<li>存储checkout编辑的文件。</li>
+<li>分支切换时，工作目录文件会经常被替换和删除。</li>
+<li>历史信息保存在Git目录中。</li>
+</ul>
+<h3 id="Git索引"><a href="#Git索引" class="headerlink" title="Git索引"></a>Git索引</h3><ul>
+<li>在工作目录和项目仓库之间的暂存区，即staging area。</li>
+<li>被暂存（位于Git索引中），修改但未暂存，没有跟踪（untracked）。</li>
+</ul>
+<h3 id="工作流程"><a href="#工作流程" class="headerlink" title="工作流程"></a>工作流程</h3><ol>
+<li>git add file1 file2 file3</li>
+<li>git diff (–cached)</li>
+<li>git status</li>
+<li>git commit (-a)</li>
+</ol>
+<h3 id="分支与合并"><a href="#分支与合并" class="headerlink" title="分支与合并"></a>分支与合并</h3><ul>
+<li>git branch experimental</li>
+<li>git branch </li>
+<li>git checkout experimental</li>
+<li>(edit file)</li>
+<li>git commit -a</li>
+<li>git checkout master</li>
+<li>(edit file)</li>
+<li>git commit -a</li>
+<li>git merge experimental</li>
+<li>git diff</li>
+<li>git branch -d experimental</li>
+<li>git reset –hard HEAD</li>
+</ul>
+<h3 id="查看历史"><a href="#查看历史" class="headerlink" title="查看历史"></a>查看历史</h3><ul>
+<li>git log v2.5..                   # commits since (not reachable from) v2.5</li>
+<li>git log test..master             # commits reachable from master but not test</li>
+<li>git log master..test             # commits reachable from test but not master</li>
+<li>git log master…test            # commits reachable from either test or master, but not both</li>
+<li>git log –since=”2 weeks ago”    # commits from the last 2 weeks</li>
+<li>git log Makefile                 # commits that modify Makefile</li>
+<li>git log fs/                      # commits that modify any file under fs/</li>
+<li>git log -S’foo()’                # commits that add or remove any file data matching the string ‘foo()’</li>
+<li>git log –no-merges              # dont show merge commits</li>
+</ul>
+<h2 id="一些姿势"><a href="#一些姿势" class="headerlink" title="一些姿势"></a>一些姿势</h2><ul>
+<li>Git会记录每次提交的全部内容，即snapshot。</li>
+<li>提交本身不会记录修改信息，所有修改都是通过与父修改比较的得知。</li>
+<li>Git不会显式地记录文件的更名操作。</li>
+<li>Commit的注释技巧，标题+正文，中间空行。</li>
+<li>如果当前分支和另一个分支没有内容上的差异，git会执行fast forward操作，不创建任何commit，只是将当前分支指向合并进来的分支。</li>
+</ul>
+<h2 id="一些操作"><a href="#一些操作" class="headerlink" title="一些操作"></a>一些操作</h2><ul>
+<li>git show &amp; git ls-tree &amp; git cat-file</li>
+<li>git status：查看索引内容。</li>
+<li>git init &amp; git clone</li>
+<li>git add &amp; git diff &amp; git commit</li>
+<li>git branch &amp; git checkout</li>
+<li>gitk</li>
+<li>git reset –hard HEAD</li>
+<li>git log</li>
+</ul>
+<hr>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>如果觉得对您有帮助，请我喝杯咖啡可好？</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/ali_pay.jpg" alt="lhzbxx WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/wechat_pay.jpg" alt="lhzbxx Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/备忘/" rel="tag">#备忘</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/07/06/gambade-function-design/" rel="next" title="「Gambade」设计与实现">
+                <i class="fa fa-chevron-left"></i> 「Gambade」设计与实现
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/07/27/sander-function-design/" rel="prev" title="「Sander」功能设计">
+                「Sander」功能设计 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/07/06/git-book-read-review/"
+           data-title="「Git Book」读后感（未完成）" data-url="http://lhzbxx.top/2016/07/06/git-book-read-review/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpeg"
+               alt="lhzbxx" />
+          <p class="site-author-name" itemprop="name">lhzbxx</p>
+          <p class="site-description motion-element" itemprop="description">I'll carry this world.</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">17</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/lhzbxx" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/3789369385" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.zhihu.com/people/lu-hao-59" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-circle"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://steamcommunity.com/id/lhzbxx" target="_blank" title="Steam">
+                  
+                    <i class="fa fa-fw fa-steam"></i>
+                  
+                  Steam
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              作品集
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://github.com/lhzbxx/follow3" title="Follow3" target="_blank">Follow3</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://github.com/lhzbxx/saveplus" title="Save+" target="_blank">Save+</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一些概念"><span class="nav-number">1.</span> <span class="nav-text">一些概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Git模型"><span class="nav-number">1.1.</span> <span class="nav-text">Git模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#目录"><span class="nav-number">1.2.</span> <span class="nav-text">目录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#工作目录"><span class="nav-number">1.3.</span> <span class="nav-text">工作目录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Git索引"><span class="nav-number">1.4.</span> <span class="nav-text">Git索引</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#工作流程"><span class="nav-number">1.5.</span> <span class="nav-text">工作流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分支与合并"><span class="nav-number">1.6.</span> <span class="nav-text">分支与合并</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查看历史"><span class="nav-number">1.7.</span> <span class="nav-text">查看历史</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一些姿势"><span class="nav-number">2.</span> <span class="nav-text">一些姿势</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一些操作"><span class="nav-number">3.</span> <span class="nav-text">一些操作</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">lhzbxx</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="//cdn.bootcss.com/jquery/2.1.3/jquery.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.bootcss.com/jquery_lazyload/1.9.7/jquery.lazyload.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.bootcss.com/velocity/1.2.3/velocity.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.bootcss.com/velocity/1.2.3/velocity.ui.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"lhzbxx"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementById('footer')
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+      
+      <script src="//cdn.bootcss.com/UAParser.js/0.7.10/ua-parser.min.js"></script>
+      <script src="/js/src/hook-duoshuo.js"></script>
+    
+  
+
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>
