@@ -80,7 +80,7 @@ deploy:
 - type: rsync
   host: 115.28.71.169
   user: root
-  root: /home/www/blog
+  root: /root/www/blog
   port: 22
   delete: true
   verbose: true
